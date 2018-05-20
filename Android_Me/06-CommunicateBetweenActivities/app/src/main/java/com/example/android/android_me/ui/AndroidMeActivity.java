@@ -35,8 +35,9 @@ public class AndroidMeActivity extends AppCompatActivity {
         // Only create new fragments when there is no previously saved state
         if(savedInstanceState == null) {
 
-            // TODO (5) Retrieve list index values that were sent through an intent; use them to display the desired Android-Me body part image
-                // Use setListindex(int index) to set the list index for all BodyPartFragments
+            // COMPLETED (5) Retrieve list index values that were sent through an intent; use them to display the desired Android-Me body part image
+            // Use setListindex(int index) to set the list index for all BodyPartFragments
+            Bundle listIndexBundle = getIntent().getExtras();
 
             // Create a new head BodyPartFragment
             BodyPartFragment headFragment = new BodyPartFragment();
@@ -65,6 +66,12 @@ public class AndroidMeActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .add(R.id.leg_container, legFragment)
                     .commit();
+
+            if(listIndexBundle != null){
+                headFragment.setListIndex(listIndexBundle.getInt("headIndex"));
+                bodyFragment.setListIndex(listIndexBundle.getInt("bodyIndex"));
+                legFragment.setListIndex(listIndexBundle.getInt("legIndex"));
+            }
         }
 
     }
